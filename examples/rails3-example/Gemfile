@@ -4,5 +4,5 @@ gem 'rails', '>=3.0.0'
 
 # gem 'isotope'
 gem 'json'
-gem 'johnson'
+gem "therubyracer", "~>0.9.3beta1"
 gem 'sqlite3-ruby', :require => 'sqlite3'
