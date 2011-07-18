@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'johnson'
+require 'v8'
 require 'json'
 require 'yaml'
 require 'erb'
@@ -39,14 +39,16 @@ module Isotope
     
     view_file_content = template_file_content(view_file)
     
+
+    ctx = V8::Context.new
+    ctx.load(isotope_file_path)
+      
     script = "
       #{included_scripts_source}
-      Johnson.runtime.load('#{isotope_file_path}');
       Isotope(#{view_file_content.to_json}, #{options[:locals].to_json});
     "
-
-    output = Johnson.evaluate(script)
-    
+    output = ctx.eval(script)
+        
     output
   end
   
